@@ -8,7 +8,7 @@ jobs:
     - name: Publish to Registry
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
-        name: myDocker/repository
+        name: ZeroWasteTeam/SampleCSharpDocker
         username: nachiapan@gmail.com
         password: John28nash
         registry: docker.pkg.github.com
