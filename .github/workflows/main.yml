@@ -9,5 +9,9 @@ jobs:
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
         name: myDocker/repository
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+        username: nachiapan@gmail.com
+        password: John28nash
+        registry: docker.pkg.github.com
+        dockerfile: SampleCSharpDockerSolution/SampleCSharpDockerProject/Dockerfile
+        context: SampleCSharpDockerSolution
+        tags: "latest,another"
