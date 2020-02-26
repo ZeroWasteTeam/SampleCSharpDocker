@@ -10,7 +10,7 @@ jobs:
       with:
         name: zerowasteteam/samplecsharpdocker/samplecsharpdocker
         username: nachiappannk
-        password: e3fbdf616544225e2bc9b5865702d7f40a9b94e7
+        password: badc8cc883da16cf4fe8020031c374e0b3158220
         registry: docker.pkg.github.com
         dockerfile: SampleCSharpDockerSolution/SampleCSharpDockerProject/Dockerfile
         context: SampleCSharpDockerSolution
