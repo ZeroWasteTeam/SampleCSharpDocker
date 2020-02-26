@@ -27,7 +27,7 @@ jobs:
       - name: Print Path
         run: pwd
       - name: Run tests
-        run: docker build SampleCSharpDockerSolution --file SampleCSharpDockerSolution/SampleCSharpDockerProject/Dockerfile
+        run: docker build SampleCSharpDockerSolution --file SampleCSharpDockerSolution/SampleCSharpDockerProject/Dockerfile --tag image
   # Push image to GitHub Package Registry.
   # See also https://docs.docker.com/docker-hub/builds/
   push:
@@ -36,12 +36,9 @@ jobs:
 
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
-
+    
     steps:
       - uses: actions/checkout@v2
-
-      - name: Build image
-        run: docker build . --file Dockerfile --tag image
 
       - name: Log into registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
