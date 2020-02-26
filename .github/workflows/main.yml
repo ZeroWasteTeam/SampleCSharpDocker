@@ -9,7 +9,7 @@ jobs:
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
         name: zerowasteteam/samplecsharpdocker/samplecsharpdocker
-        username: nachiapan@gmail.com
+        username: nachiappannk
         password: e3fbdf616544225e2bc9b5865702d7f40a9b94e7
         registry: docker.pkg.github.com
         dockerfile: SampleCSharpDockerSolution/SampleCSharpDockerProject/Dockerfile
