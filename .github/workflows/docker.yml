@@ -20,31 +20,16 @@ env:
 jobs:
   # Run tests.
   # See also https://docs.docker.com/docker-hub/builds/automated-testing/
-  test:
+  build:
+    name: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Print Path
-        run: pwd
-      - name: Run tests
+      - name: Build the Docker image
+        run: docker build -t docker.pkg.github.com/zerowasteteam/samplecsharpdocker/my-image:latest .
+      - name: Push the image to Github Packages Repository
         run: |
-          docker build SampleCSharpDockerSolution --file SampleCSharpDockerSolution/SampleCSharpDockerProject/Dockerfile --tag docker.pkg.github.com/zerowasteteam/samplecsharpdocker/my-image:latest
-          pwd
-          ls -a
-  # Push image to GitHub Package Registry.
-  # See also https://docs.docker.com/docker-hub/builds/
-  push:
-    # Ensure test job passes before pushing image.
-    needs: test
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+          docker push docker.pkg.github.com/zerowasteteam/samplecsharpdocker/my-image:latest   
 
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push'
-    
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Log into registry
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
-
-      - name: Push image 
-        run: docker push docker.pkg.github.com/zerowasteteam/samplecsharpdocker/my-image:latest 
+  
