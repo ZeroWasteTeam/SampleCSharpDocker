@@ -27,7 +27,10 @@ jobs:
       - name: Print Path
         run: pwd
       - name: Run tests
-        run: docker build SampleCSharpDockerSolution --file SampleCSharpDockerSolution/SampleCSharpDockerProject/Dockerfile --tag docker.pkg.github.com/zerowasteteam/samplecsharpdocker/my-image:latest
+        run: |
+          docker build SampleCSharpDockerSolution --file SampleCSharpDockerSolution/SampleCSharpDockerProject/Dockerfile --tag docker.pkg.github.com/zerowasteteam/samplecsharpdocker/my-image:latest
+          pwd
+          ls -a
   # Push image to GitHub Package Registry.
   # See also https://docs.docker.com/docker-hub/builds/
   push:
