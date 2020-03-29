@@ -1,16 +1,20 @@
-FROM microsoft/aspnetcore-build:2.0 AS build-env
+FROM microsoft/dotnet:2.2-aspnetcore-runtime AS base
 WORKDIR /app
+EXPOSE 80
+EXPOSE 443
 
-# copy csproj and restore as distinct layers
-COPY *.csproj ./
-RUN dotnet restore
+FROM microsoft/dotnet:2.2-sdk AS build
+WORKDIR /src
+COPY ["SampleCSharpDockerProject/*/SampleCSharpDockerProject.csproj", "src/"]
+RUN dotnet restore "src/SampleCSharpDockerProject.csproj"
+COPY . .
+WORKDIR "/src/SampleCSharpDockerProject"
+RUN dotnet build "SampleCSharpDockerProject.csproj" -c Release -o /app
 
-# copy everything else and build
-COPY . ./
-RUN dotnet publish -c Release -o out
+FROM build AS publish
+RUN dotnet publish "SampleCSharpDockerProject.csproj" -c Release -o /app
 
-# build runtime image
-FROM microsoft/aspnetcore:2.0
+FROM base AS final
 WORKDIR /app
-COPY --from=build-env /app/out .
-ENTRYPOINT ["dotnet", "aspnetapp.dll"]
+COPY --from=publish /app .
+ENTRYPOINT ["dotnet", "SampleCSharpDockerProject.dll"]
