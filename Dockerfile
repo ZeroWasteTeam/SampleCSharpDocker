@@ -5,8 +5,7 @@ EXPOSE 443
 
 FROM microsoft/dotnet:2.2-sdk AS build
 WORKDIR /src
-COPY ["SampleCSharpDockerSolution/*/SampleCSharpDockerProject.csproj", "src/"]
-COPY ..
+COPY ["SampleCSharpDockerSolution/", "src/"]
 RUN dotnet restore "src/SampleCSharpDockerProject.csproj"
 COPY . .
 WORKDIR /src/src
