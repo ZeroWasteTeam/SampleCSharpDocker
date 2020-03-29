@@ -20,6 +20,6 @@ jobs:
     - name: Install dependencies
       run: dotnet restore "SampleCSharpDockerSolution/SampleCSharpDockerProject/SampleCSharpDockerProject.csproj"
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build "SampleCSharpDockerSolution/SampleCSharpDockerProject/SampleCSharpDockerProject.csproj" --configuration Release --no-restore
     - name: Test
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet test "SampleCSharpDockerSolution/SampleCSharpDockerProject/SampleCSharpDockerProject.csproj" --no-restore --verbosity normal
