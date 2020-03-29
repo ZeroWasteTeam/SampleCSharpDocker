@@ -8,7 +8,7 @@ WORKDIR /src
 COPY ["SampleCSharpDockerSolution/*/SampleCSharpDockerProject.csproj", "src/"]
 RUN dotnet restore "src/SampleCSharpDockerProject.csproj"
 COPY . .
-WORKDIR "/src/"
+WORKDIR /src/.
 RUN dotnet build "SampleCSharpDockerProject.csproj" -c Release -o /app
 
 FROM build AS publish
