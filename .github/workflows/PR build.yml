@@ -1,4 +1,4 @@
-name: .NET Core Build
+name:  Pull Request Build
 
 on:
   push:
